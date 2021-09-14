@@ -1,0 +1,27 @@
+clear, clc %limpia
+f = input('f(x)= ', 's'); % x^3+3*x^2-1
+sf = str2sym(f); % convierte string en funcion
+tol = input('tolerancia del metodo = '); % tolerancia
+x0 = input('valor inicial = '); % valor inicial
+v = symvar(sf); % extrae las variables de la funcion
+f1 = diff(sf); % calcula la derivada de una funcion
+sf
+v
+f1
+sw = 0;
+while (sw==0)
+        % subs = funcion que reemplaza valores constantes en las variables
+        % de una funcion
+    x1 = x0 - (subs (sf, v, x0) / subs (f1, v, x0));
+    fprintf ('\t x0 %f \t x1 %f \t tol %f \n', x0, x1, tol)
+    if abs(x0 - x1) > tol % aun no se encuentra la raiz
+        x0 = x1;
+        sw=0;
+    
+    else %raiz encontrda
+        sw =1;
+    end
+end
+
+vpa(x1)
+fplot(sf);
